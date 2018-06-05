@@ -1,32 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{ server.server_name }}</title>
-    <style>
-        table {
-            font-family: arial, sans-serif;
-            border-collapse: collapse;
-            width: 100%;
-        }
-        
-        td, th {
-            border: 1px solid #dddddd;
-            text-align: center;
-            padding: 8px;
-        }
-        
-        tr:nth-child(even) {
-            background-color: #dddddd;
-        }
-    </style>
-</head>
-<body>
+{% extends 'calculator/base.html' %}
+{% block title %}Server Details{%endblock %}
 
-    <h1>{{ server.server_name }}</h1>
-    <h3>Number of Cameras: {{ server.camera_count }}</h3>
+{% block body %}
+    <h3>{{ server.server_name }}</h3>
+    <h4>Number of Cameras: {{ server.camera_count }}</h4>
 
     <table>
         <tr>
@@ -52,6 +29,6 @@
         </tr>
         {% endfor %}
     </table>
-
+{% endblock %}
 </body>
 </html>

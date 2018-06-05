@@ -10,7 +10,22 @@ def index(request):
 
 
 def server(request, server_id):
-    # server = Server.objects.get(id=server_id)
+    ''' server = Server.objects.get(id=server_id) '''
     server = get_object_or_404(Server, id=server_id)
     return render(request, 'calculator/server.html', {'server': server})
 
+
+''' GENERIC VIEWS ---------------------------------------
+from django.views import generic
+from .models import Server
+
+class IndexView(generic.ListView):
+    template_name = "calculator/index.html"
+
+    def get_queryset(self):
+        return Server.objects.all()
+
+class ServerView(generic.DetailView):
+    model = Server
+    template_name = "calculator/server.html"
+------------------------------------------------------'''

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{ server.server_name }}</title>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: center;
+            padding: 8px;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>{{ server.server_name }}</h1>
+    <h3>Number of Cameras: {{ server.camera_count }}</h3>
+
+    <table>
+        <tr>
+            <th>Channel #</th>
+            <th>Channel Name</th>
+            <th>IP Address</th>
+            <th>Avg Bitrate</th>
+            <th>Recording Enabled?</th>
+            <th>Delete Type</th>
+            <th>Assigned Space</th>
+            <th># of Days</th>
+        </tr>
+        {% for camera in server.camera_set.all %}
+        <tr>
+            <td>{{ camera.camera_number }}</td>
+            <td>{{ camera.camera_name }}</td>
+            <td>{{ camera.camera_address }}</td>
+            <td>{{ camera.avg_bitrate }}</td>
+            <td>{{ camera.rec_enabled }}</td>
+            <td>{{ camera.delete_type }}</td>
+            <td>{{ camera.assigned_space }}</td>
+            <td>{{ camera.rec_days }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+</body>
+</html>

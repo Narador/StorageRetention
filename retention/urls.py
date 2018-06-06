@@ -1,11 +1,11 @@
 ''' URLS MAIN '''
 
 from django.contrib import admin
-from django.urls import include, path
-from django.conf.urls import url
+from django.urls import path, re_path
+from django.conf.urls import include
 
 urlpatterns = [
-    path('', include('calculator.urls')),
-    url(r'^calculator/', include('calculator.urls')),
-    path('admin/', admin.site.urls),
+    re_path('^calculator/', include('calculator.urls')),
+    re_path('^admin/', admin.site.urls),
+    re_path('^', include('calculator.urls')),
 ]

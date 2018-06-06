@@ -23,17 +23,19 @@
           <li class="nav-item active">
             <a class="nav-link" href="{% url 'calculator:index' %}">Servers<span class="sr-only">(current)</span></a>
           </li>
+          <li>
+            <a href="#">
+              <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            </a>
+          </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Current Server
+            Configure
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Reload Server from Disk</a>
-              <a class="dropdown-item" href="#">Load Server Config</a>
+              <a class="dropdown-item" href="#">Add Server</a>
+              <a class="dropdown-item" href="#">Recalculate</a>
             </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#">Logout</a>
           </li>
           </ul>
       </div>

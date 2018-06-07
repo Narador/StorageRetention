@@ -18,6 +18,7 @@ def server(request, server_id):
 # GENERIC VIEWS ---------------------------------------
 
 from django.views import generic
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Server
 
 class IndexView(generic.ListView):
@@ -30,4 +31,10 @@ class IndexView(generic.ListView):
 class ServerView(generic.DetailView):
     model = Server
     template_name = "calculator/server.html"
+
+
+class ServerCreate(CreateView):
+    model = Server
+    fields = ['server_name', 'camera_count']
+
 #------------------------------------------------------

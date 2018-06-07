@@ -6,6 +6,7 @@ calculator/index.html
 '''
 
 from django.db import models
+from django.urls import reverse
 
 class Server(models.Model):
     ''' Server class to show server info and add instances Camera class '''
@@ -26,6 +27,9 @@ class Server(models.Model):
 
     # check to see if application running
     server_status = models.BooleanField(default=False)
+
+    def get_absolute_url(self):
+        return reverse('calulator:server', kwargs={'pk': self.pk})
 
     def __str__(self):
         return self.server_name

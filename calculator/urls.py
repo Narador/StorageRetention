@@ -14,5 +14,11 @@ urlpatterns = [
     re_path('^(?P<pk>[0-9]+)/$', views.ServerView.as_view(), name="server"),
 
     # /calculator/<server_id>/
-    re_path('calculator/server/add/$', views.ServerCreate.as_view(), name='server-add')
+    re_path('^server/add/$', views.ServerCreate.as_view(), name='server-add'),
+
+    # /calculator/<server_id>/
+    re_path('^server/(?P<pk>[0-9]+)/edit$', views.ServerUpdate.as_view(), name='server-update'),
+
+    # /calculator/<server_id>/delete/
+    re_path('^server/(?P<pk>[0-9]+)/delete/$', views.ServerDelete.as_view(), name='server-delete'),
 ]

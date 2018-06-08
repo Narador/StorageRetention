@@ -5,7 +5,18 @@
     <h3>Servers List:</h3>
     <ul>
       {% for server in all_servers %}
-        <li><a href="{% url 'calculator:server' server.id %}">{{ server.server_name }}</a></li>
+        <li><a href="{% url 'calculator:server' server.id %}">{{ server.server_name }}</a>
+          <form action="{% url 'calculator:server-delete' server.id %}" method="post" style="display: inline;">
+            {% csrf_token %}
+            <input type="hidden" name="server_id" value="{{ server.id }}"/>
+            <button type="submit">Delete</button>
+          </form>
+          <form action="{% url 'calculator:server-update' server.id %}" method="get" style="display: inline;">
+            {% csrf_token %}
+            <input type="hidden" name="server_id" value="{{ server.id }}"/>
+            <button type="submit">Edit</button>
+          </form>
+        </li>
       {% endfor %}
     </ul>
   {% else %}

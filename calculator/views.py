@@ -19,6 +19,7 @@ def server(request, server_id):
 
 from django.views import generic
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
 from .models import Server
 
 class IndexView(generic.ListView):
@@ -36,5 +37,13 @@ class ServerView(generic.DetailView):
 class ServerCreate(CreateView):
     model = Server
     fields = ['server_name', 'camera_count']
+
+class ServerUpdate(UpdateView):
+    model = Server
+    fields = ['server_name', 'camera_count']
+
+class ServerDelete(DeleteView):
+    model = Server
+    success_url = reverse_lazy('calculator:index')
 
 #------------------------------------------------------

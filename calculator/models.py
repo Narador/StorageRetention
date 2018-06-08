@@ -29,7 +29,7 @@ class Server(models.Model):
     server_status = models.BooleanField(default=False)
 
     def get_absolute_url(self):
-        return reverse('calulator:server', kwargs={'pk': self.pk})
+        return reverse('calculator:server', kwargs={'pk': self.pk})
 
     def __str__(self):
         return self.server_name

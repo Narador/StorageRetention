@@ -6,5 +6,5 @@ from django.conf.urls import include
 
 urlpatterns = [
     re_path('^admin/', admin.site.urls),
-    re_path('^', include('calculator.urls')),
+    path('', include('calculator.urls')),
 ]

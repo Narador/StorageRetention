@@ -23,6 +23,7 @@ from django.urls import reverse_lazy
 from .models import Server
 
 class IndexView(generic.ListView):
+    ''' Index view for showing Servers list '''
     template_name = "calculator/index.html"
     context_object_name = "all_servers"
 
@@ -30,19 +31,23 @@ class IndexView(generic.ListView):
         return Server.objects.all()
 
 class ServerView(generic.DetailView):
+    ''' Detail view showing cameras on a Server '''
     model = Server
     template_name = "calculator/server.html"
 
 
 class ServerCreate(CreateView):
+    ''' Create Server View '''
     model = Server
-    fields = ['server_name', 'camera_count']
+    fields = ['server_name', 'total_space']
 
 class ServerUpdate(UpdateView):
+    ''' Update Server View '''
     model = Server
-    fields = ['server_name', 'camera_count']
+    fields = ['server_name', 'total_space']
 
 class ServerDelete(DeleteView):
+    ''' Delete Server View (goes back to index after delete) '''
     model = Server
     success_url = reverse_lazy('calculator:index')
 

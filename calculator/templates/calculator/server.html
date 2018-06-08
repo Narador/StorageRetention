@@ -3,27 +3,21 @@
 
 {% block body %}
     <h3>{{ server.server_name }}</h3>
-    <h4>Number of Cameras: {{ server.camera_count }}</h4>
+    <h4>Total Space: {{ server.total_space }} GB</h4>
 
     <table>
         <tr>
             <th>Channel #</th>
             <th>Channel Name</th>
-            <th>IP Address</th>
             <th>Avg Bitrate</th>
-            <th>Recording Enabled?</th>
-            <th>Delete Type</th>
-            <th>Assigned Space</th>
+            <th>Assigned Space(GB)</th>
             <th># of Days</th>
         </tr>
         {% for camera in server.camera_set.all %}
         <tr>
             <td>{{ camera.camera_number }}</td>
             <td>{{ camera.camera_name }}</td>
-            <td>{{ camera.camera_address }}</td>
             <td>{{ camera.avg_bitrate }}</td>
-            <td>{{ camera.rec_enabled }}</td>
-            <td>{{ camera.delete_type }}</td>
             <td>{{ camera.assigned_space }}</td>
             <td>{{ camera.rec_days }}</td>
         </tr>

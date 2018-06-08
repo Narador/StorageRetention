@@ -1,7 +1,6 @@
 '''URLS for Calculator App'''
 
-from django.conf.urls import url
-from django.urls import path, re_path
+from django.urls import re_path
 from . import views
 
 app_name = 'calculator'

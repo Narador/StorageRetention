@@ -8,56 +8,47 @@ calculator/index.html
 from django.db import models
 from django.urls import reverse
 
+# try to use this count method for calculating assigned space
+# from django.db.models import Count
+
+INTEGER_CHOICES = [tuple([x, x]) for x in range(1, 73)]
+BITRATE_CHOICES = []
+
 class Server(models.Model):
     ''' Server class to show server info and add instances Camera class '''
     # <base-root>--><identification>--><server-name>
     server_name = models.CharField(max_length=255)
 
-    # NO WAY TO PARSE FROM XML...
-    # serial_number = models.CharField(max_length=9)
-
-    # NO WAY TO PARSE FROM XML...
-    # server_version = models.CharField(max_length=50)
-
     # all quota="" attributes from <recordings>
-    total_space = models.CharField(max_length=20)
+    total_space = models.PositiveIntegerField()
 
-    # iterate through Camera class objects
-    camera_count = models.CharField(max_length=3)
-
-    # check to see if application running
-    server_status = models.BooleanField(default=False)
+    # number of cameras used in calculating assigned space
 
     def get_absolute_url(self):
+        ''' Used in creating, updating and deleting Server instances '''
+
         return reverse('calculator:server', kwargs={'pk': self.pk})
 
     def __str__(self):
         return self.server_name
+        
 
 class Camera(models.Model):
     ''' Camera class to display cmaera information after parsed from 
     baseconfig.xml '''
     server = models.ForeignKey(Server, on_delete=models.CASCADE)
+
     # <video-source id="" ...>
     camera_number = models.CharField(max_length=3)
 
     # <video-source ... descr="" ...>
     camera_name = models.CharField(max_length=255)
 
-    # <s-params ... addr="192.168.1.114" ...>
-    camera_address = models.CharField(max_length=15)
-
     # <stats KBsec=""/> -- will need to convert to Kbps
     avg_bitrate = models.CharField(max_length=20)
 
-    # <dvrcfg ena="" ...>
-    rec_enabled = models.BooleanField(default=False)
-
-    # <autodlt ... max-space-type="auto" ...>
-    delete_type = models.CharField(max_length=4)
-
     # (space on the current path) <autodlt ... max-space="" ...>
-    assigned_space = models.CharField(max_length=15)
+    assigned_space = models.CharField(max_length=20)
 
     # number of days from calculation
     rec_days = models.CharField(max_length=5)

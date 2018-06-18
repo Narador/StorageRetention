@@ -12,7 +12,17 @@ from django.urls import reverse
 # from django.db.models import Count
 
 INTEGER_CHOICES = [tuple([x, x]) for x in range(1, 73)]
-BITRATE_CHOICES = []
+
+BITRATE_CHOICES = (
+    ('1MP', '1024'),
+    ('2MP', '2048'),
+    ('3MP', '3072'),
+    ('4MP', '4096'),
+    ('5MP', '5120'),
+    ('6MP', '6144'),
+    ('7MP', '7168'),
+    ('8MP', '9192'),
+)
 
 class Server(models.Model):
     ''' Server class to show server info and add instances Camera class '''
@@ -45,7 +55,7 @@ class Camera(models.Model):
     camera_name = models.CharField(max_length=255)
 
     # <stats KBsec=""/> -- will need to convert to Kbps
-    avg_bitrate = models.CharField(max_length=20)
+    avg_bitrate = models.CharField(max_length=4, choices = BITRATE_CHOICES)
 
     # (space on the current path) <autodlt ... max-space="" ...>
     assigned_space = models.CharField(max_length=20)

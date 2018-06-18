@@ -7,16 +7,16 @@
 
     <table>
         <tr>
-            <th>Channel #</th>
-            <th>Channel Name</th>
-            <th>Avg Bitrate</th>
+            <th># of Channels</th>
+            <th>Model</th>
+            <th>Bitrate</th>
             <th>Assigned Space(GB)</th>
             <th># of Days</th>
         </tr>
         {% for camera in server.camera_set.all %}
         <tr>
-            <td>{{ camera.camera_number }}</td>
-            <td>{{ camera.camera_name }}</td>
+            <td>{{ camera.camera_count }}</td>
+            <td>{{ camera.camera_model }}</td>
             <td>{{ camera.avg_bitrate }}</td>
             <td>{{ camera.assigned_space }}</td>
             <td>{{ camera.rec_days }}</td>

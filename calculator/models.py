@@ -11,17 +11,17 @@ from django.urls import reverse
 # try to use this count method for calculating assigned space
 # from django.db.models import Count
 
-INTEGER_CHOICES = [tuple([x, x]) for x in range(1, 73)]
+# INTEGER_CHOICES = [tuple([x, x]) for x in range(1, 73)]
 
 BITRATE_CHOICES = (
-    ('1MP', '1024'),
-    ('2MP', '2048'),
-    ('3MP', '3072'),
-    ('4MP', '4096'),
-    ('5MP', '5120'),
-    ('6MP', '6144'),
-    ('7MP', '7168'),
-    ('8MP', '9192'),
+    (1024, '1MP'),
+    (2048, '2MP'),
+    (3072, '3MP'),
+    (4096, '4MP'),
+    (5120, '5MP'),
+    (6144, '6MP'),
+    (7168, '7MP'),
+    (9192, '8MP'),
 )
 
 class Server(models.Model):
@@ -49,19 +49,22 @@ class Camera(models.Model):
     server = models.ForeignKey(Server, on_delete=models.CASCADE)
 
     # <video-source id="" ...>
-    camera_number = models.CharField(max_length=3)
+    camera_count = models.PositiveIntegerField()
 
     # <video-source ... descr="" ...>
-    camera_name = models.CharField(max_length=255)
+    camera_model = models.CharField(max_length=255)
 
     # <stats KBsec=""/> -- will need to convert to Kbps
-    avg_bitrate = models.CharField(max_length=4, choices = BITRATE_CHOICES)
+    avg_bitrate = models.IntegerField(choices = BITRATE_CHOICES)
 
     # (space on the current path) <autodlt ... max-space="" ...>
-    assigned_space = models.CharField(max_length=20)
+    assigned_space = models.PositiveIntegerField()
 
     # number of days from calculation
-    rec_days = models.CharField(max_length=5)
+    def _get_days(self):
+        return str(round(self.camera_count * self.avg_bitrate * 3600 * 24 / self.assigned_space /8/1024/1024, 2))
+
+    rec_days = property(_get_days)
 
     def __str__(self):
-        return self.camera_name
+        return self.camera_model

@@ -1,0 +1,26 @@
+{% extends 'calculator/base.html' %}
+{% block title %}Add a New Camera Type{% endblock %}
+{% block cameras_active %}active{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+    <div class="row">
+        <div>
+            <div>
+                <div>
+                    <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% include 'calculator/form-template.html' %}
+                        <div class="form-group">
+                            <div>
+                                <button type="submit" class="btn btn-success">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+              
+{% endblock %}
